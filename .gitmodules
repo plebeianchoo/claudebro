@@ -1,0 +1,6 @@
+[submodule "claudebro_panes"]
+	path = claudebro_panes
+	url = ../claudebro_panes.git
+[submodule "claude-statusline"]
+	path = claude-statusline
+	url = ../claude-statusline.git
