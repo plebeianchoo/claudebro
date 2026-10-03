@@ -4,3 +4,6 @@
 [submodule "claude-statusline"]
 	path = claude-statusline
 	url = ../claude-statusline.git
+[submodule "claude-mods"]
+	path = claude-mods
+	url = ../claude-mods.git

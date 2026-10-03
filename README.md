@@ -8,6 +8,7 @@ everything.
 |---|---|
 | [`claudebro_panes`](https://github.com/plebeianchoo/claudebro_panes) | Two-pane tmux layout for Claude Code (Claude on top, a shell below), plus Nord theme, popups (lazygit, btop, markdown, tldr, session picker) and "Claude needs you" alerts |
 | [`claude-statusline`](https://github.com/plebeianchoo/claude-statusline) | Custom Claude Code statusline: cwd, branch, model, cost, context and a 5h usage bar |
+| `claude-mods` (private) | My own Claude Code mods, as a local plugin marketplace. Private, so a clone without access skips it |
 
 ## Set up on a new machine
 
