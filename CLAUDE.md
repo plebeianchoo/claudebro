@@ -12,7 +12,7 @@ brings everything. All real work happens inside a submodule.
 |---|---|---|
 | `claudebro_panes/` | tmux two-pane layout (Claude top, shell bottom), Nord theme, popups, "Claude needs you" bell hooks | `claudebro_panes/README.md` ("How it works, and why" explains the non-obvious design choices) |
 | `claude-statusline/` | single-script statusline (`statusline.sh`, bash + jq) | `claude-statusline/README.md` |
-| `claude-mods/` (**private**) | local plugin marketplace `claudebro-mods`; currently one mod, `cat-clawd-duo` | `claude-mods/README.md` |
+| `claude-mods/` (**private**) | local plugin marketplace `claudebro-mods`: `cat-clawd-duo` and `spinner` (own forks of upstream spinner mods) | `claude-mods/README.md` |
 
 Submodule URLs are relative (`../<repo>.git`), so they resolve against however
 this repo was cloned. The clone must live at `~/claudebro`: `~/.tmux.conf`, the
@@ -56,21 +56,15 @@ echo '{"workspace":{"current_dir":"/tmp/demo"},"model":{"display_name":"Opus 5"}
 Check all three rendering tiers: `COLORTERM=truecolor`, unset (256-colour), and
 `CLAUDE_STATUSLINE_ASCII=1`.
 
-**claude-mods / cat-clawd-duo** — the mod directory is **generated; don't
-hand-edit `cat-clawd-duo/` as the source of truth.** `build/cat-clawd-duo.sh`
-assembles it from the upstream cat-spinner and clawd-spinner marketplace clones
-in `~/.claude/plugins/marketplaces/`, applies renames, then
-`build/cat-clawd-duo.patch`, and runs `claude plugin validate` + `claude plugin
-test` into `.staged/`.
+**claude-mods** — `cat-clawd-duo/` and `spinner/` are Jeremy's own forks
+(of cat-spinner + clawd-spinner, and hoobnn's spinner) and are edited in place.
+Test a change, then reinstall:
 
 ```sh
-build/cat-clawd-duo.sh               # build + validate + test into .staged/, report diff vs installed
-build/cat-clawd-duo.sh --install     # also replace cat-clawd-duo/, commit, update the installed plugin
-build/cat-clawd-duo.sh --pristine D  # upstream only (no patch) into D, for regenerating the patch
+claude plugin validate <mod>/.claude-plugin/plugin.json && claude plugin test <mod>
+claude plugin marketplace update claudebro-mods && claude plugin update <mod>@claudebro-mods
 ```
 
-Exit codes: 0 ok, 2 patch no longer applies (re-apply the change on the new
-upstream by hand), 3 validate/test failed (logs in `.staged/`). To change the
-duo, edit a built copy and regenerate the patch against `--pristine` output, as
-described in `claude-mods/README.md`. A weekly `claude-autoupdate` job runs the
-build but never installs.
+Nothing tracks upstream automatically. `build/upstream-diff.sh` (read-only) lists
+upstream commits since each fork's baseline in `build/upstream.tsv`; port what's
+wanted by hand, then `build/upstream-diff.sh --mark <name>`.
