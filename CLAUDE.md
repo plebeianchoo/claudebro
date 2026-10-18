@@ -65,6 +65,8 @@ claude plugin validate <mod>/.claude-plugin/plugin.json && claude plugin test <m
 claude plugin marketplace update claudebro-mods && claude plugin update <mod>@claudebro-mods
 ```
 
-Nothing tracks upstream automatically. `build/upstream-diff.sh` (read-only) lists
-upstream commits since each fork's baseline in `build/upstream.tsv`; port what's
-wanted by hand, then `build/upstream-diff.sh --mark <name>`.
+The originals live as reference clones in `upstream/<name>/` (gitignored).
+`upstream/check.sh` lists upstream commits since each fork's baseline in
+`upstream/sources.tsv` (a monthly timer runs it with `--notify` → Telegram); port
+what's wanted by hand, then `upstream/check.sh --mark <name>`. New source:
+`upstream/check.sh --add <name> <url> <mod> [paths]`.
