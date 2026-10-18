@@ -66,7 +66,8 @@ claude plugin marketplace update claudebro-mods && claude plugin update <mod>@cl
 ```
 
 The originals live as reference clones in `upstream/<name>/` (gitignored).
-`upstream/check.sh` lists upstream commits since each fork's baseline in
-`upstream/sources.tsv` (a monthly timer runs it with `--notify` → Telegram); port
-what's wanted by hand, then `upstream/check.sh --mark <name>`. New source:
-`upstream/check.sh --add <name> <url> <mod> [paths]`.
+`upstream/check.sh` triages each upstream commit since the baseline in
+`upstream/sources.tsv` (docs / release / ported / unused / clean / conflict), using
+`upstream/maps/<name>.sed` to map upstream paths onto the mod. A monthly timer runs it
+with `--notify` → Telegram. Port with the `port-upstream` skill (`--port`, security
+review, validate + test, commit, `--mark`); details in `claude-mods/upstream/README.md`.
