@@ -12,10 +12,10 @@ brings everything. All real work happens inside a submodule.
 |---|---|---|
 | `claudebro_panes/` | tmux two-pane layout (Claude top, shell bottom), Nord theme, popups, "Claude needs you" bell hooks | `claudebro_panes/README.md` ("How it works, and why" explains the non-obvious design choices) |
 | `claude-statusline/` | single-script statusline (`statusline.sh`, bash + jq) | `claude-statusline/README.md` |
-| `claude-mods/` (**private**) | local plugin marketplace `claudebro-mods`: `cat-clawd-duo` and `spinner` (own forks of upstream spinner mods) | `claude-mods/README.md` |
+| `claude-mods/` (**private**) | local plugin marketplace `claudebro-mods`: `cat-clawd-duo` and `spinner` (own forks of upstream spinner mods), `peek` (own, no upstream), `templates/blink-spinner` (starter) | `claude-mods/README.md` |
 
 Submodule URLs are relative (`../<repo>.git`), so they resolve against however
-this repo was cloned. The clone must live at `~/claudebro`: `~/.tmux.conf`, the
+this repo was cloned. The clone must live at `~/code/claudebro`: `~/.tmux.conf`, the
 shell rc and `~/.claude/settings.json` reference files in it by absolute path,
 so don't move or rename files that are sourced from outside without updating
 the installers.
@@ -26,8 +26,8 @@ Each submodule is its own repo. Commit and push **inside** the submodule first,
 then record the new pointer here:
 
 ```sh
-cd ~/claudebro/<sub> && git commit -am "…" && git push
-cd ~/claudebro && git add <sub> && git commit -m "Bump <sub>" && git push
+cd ~/code/claudebro/<sub> && git commit -am "…" && git push
+cd ~/code/claudebro && git add <sub> && git commit -m "Bump <sub>" && git push
 ```
 
 Before committing in a submodule, check it is on `main` and not a detached HEAD
@@ -58,6 +58,7 @@ Check all three rendering tiers: `COLORTERM=truecolor`, unset (256-colour), and
 
 **claude-mods** — `cat-clawd-duo/` and `spinner/` are Jeremy's own forks
 (of cat-spinner + clawd-spinner, and hoobnn's spinner) and are edited in place.
+`peek/` is Jeremy's own mod with no upstream; the same validate/test/reinstall steps apply to it.
 Test a change, then reinstall:
 
 ```sh
