@@ -12,7 +12,7 @@ brings everything. All real work happens inside a submodule.
 |---|---|---|
 | `claudebro_panes/` | tmux two-pane layout (Claude top, shell bottom), Nord theme, popups, "Claude needs you" bell hooks | `claudebro_panes/README.md` ("How it works, and why" explains the non-obvious design choices) |
 | `claude-statusline/` | single-script statusline (`statusline.sh`, bash + jq) | `claude-statusline/README.md` |
-| `claude-mods/` (**private**) | local plugin marketplace `claudebro-mods`: `cat-clawd-duo` and `spinner` (own forks of upstream spinner mods), `peek` (own, no upstream), `templates/blink-spinner` (starter) | `claude-mods/README.md` |
+| `claude-mods/` (**private**) | local plugin marketplace `claudebro-mods`: `cat-clawd-duo` and `showtime` (own forks of upstream spinner mods), `peek` (own, no upstream), `templates/blink-spinner` (starter) | `claude-mods/README.md` |
 
 Submodule URLs are relative (`../<repo>.git`), so they resolve against however
 this repo was cloned. The clone must live at `~/code/claudebro`: `~/.tmux.conf`, the
@@ -56,7 +56,7 @@ echo '{"workspace":{"current_dir":"/tmp/demo"},"model":{"display_name":"Opus 5"}
 Check all three rendering tiers: `COLORTERM=truecolor`, unset (256-colour), and
 `CLAUDE_STATUSLINE_ASCII=1`.
 
-**claude-mods** — `cat-clawd-duo/` and `spinner/` are Jeremy's own forks
+**claude-mods** — `cat-clawd-duo/` and `showtime/` (formerly `spinner`) are Jeremy's own forks
 (of cat-spinner + clawd-spinner, and hoobnn's spinner) and are edited in place.
 `peek/` is Jeremy's own mod with no upstream; the same validate/test/reinstall steps apply to it.
 Test a change, then reinstall:
